@@ -1,0 +1,53 @@
+{
+  "key": "NovPost",
+  "title": "11 月更文挑战",
+  "docLink": "https://juejin.cn/post/7023643374569816095",
+  "categories": ["前端", "后端", "Android", "iOS", "人工智能"],
+  "startTimeStamp": 1635696000000,
+  "endTimeStamp": 1638287999999,
+  "signSlogan": "2021最后一次更文挑战",
+  "signLink": "https://juejin.cn/post/7023643374569816095",
+  "wordCount": 500,
+  "rules": [
+    {
+      "title": "等级关卡",
+      "rewards": [
+        {
+          "name": "第一关",
+          "days": 7
+        },
+        {
+          "name": "第二关",
+          "days": 14
+        },
+        {
+          "name": "第三关",
+          "days": 21
+        },
+        {
+          "name": "第四关",
+          "days": 28
+        }
+      ]
+    },
+    {
+      "title": "「劳模」奖励",
+      "rewards": [
+        {
+          "name": "「劳模」奖励",
+          "count": 45
+        }
+      ]
+    },
+    {
+      "title": "终极幸运大奖",
+      "rewards": [
+        {
+          "name": "终极幸运大奖",
+          "count": 7,
+          "text": "可参与抽奖"
+        }
+      ]
+    }
+  ]
+}

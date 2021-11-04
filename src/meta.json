@@ -1,0 +1,8 @@
+{
+  "@name": "juejin-post-tracker",
+  "@include": "*",
+  "@run-at": "document-end",
+  "@require": "tampermonkey://vendor/jquery.js",
+  "@match": "juejin.cn",
+  "@connect": "juejin.cn"
+}

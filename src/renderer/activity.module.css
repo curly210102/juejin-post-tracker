@@ -1,0 +1,58 @@
+.text-gray-600 {
+  color: #8a9aa9;
+}
+.text-gray-300 {
+  color: #939aa3a3;
+}
+.statistics .count {
+  font-size: 16px;
+}
+
+.statistics .hint {
+  margin-top: 4px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex .item {
+  flex: 1;
+  text-align: center;
+}
+
+.progress {
+  --progress: 0;
+  border-radius: 20px;
+  padding: 0.5em 1em;
+  position: relative;
+  overflow: hidden;
+  background-color: #f4f5f5;
+}
+.progress > i {
+  font-size: 1rem;
+  font-weight: 700;
+  position: relative;
+  color: hsl(0, 0%, calc((var(--progress) * 0.2 + 0.8) * 100%));
+}
+.progress:before {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(var(--progress) * 100%);
+  background-color: #007fff;
+}
+
+.streakItem {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.streakItem > span {
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin-left: 2px;
+}

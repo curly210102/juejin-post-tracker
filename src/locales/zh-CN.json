@@ -1,0 +1,10 @@
+{
+  "title": "开始开发你的脚本吧～",
+  "support-es": "支持 ESNext",
+  "support-css": "支持 CSS Modules（如果需要 scss，安装 node-sass 即可使用）",
+  "support-static": "支持静态资源（图片和SVG）",
+  "support-svg-sprite": "支持 SVG 雪碧图",
+  "support-locale": "支持国际化",
+  "support-plugin": "内部由 rollup 支撑，可以通过插件做扩展",
+  "got-it": "了解了"
+}

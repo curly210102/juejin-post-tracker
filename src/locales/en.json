@@ -1,0 +1,10 @@
+{
+  "title": "Start create awesome userscript",
+  "support-es": "Support ESNext",
+  "support-css": "Support CSS Modules (Install node-sass package to enable scss)",
+  "support-static": "Support static resources(image, svg)",
+  "support-svg-sprite": "Support SVG Sprite",
+  "support-locale": "Support locale languages",
+  "support-plugin": "Build with Rollup, you can add external plugins",
+  "got-it": "Got It"
+}
