@@ -8,9 +8,9 @@
 // @require      tampermonkey://vendor/jquery.js
 // @match        juejin.cn
 // @connect      juejin.cn
-// @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function () {
   'use strict';
@@ -154,6 +154,15 @@
     });
   }
 
+  const inSpecificProfilePage = (pathname, userId) => {
+    return new RegExp(`^\\/user\\/${userId}(?:\\/|$)`).test(pathname);
+  };
+  const getUserIdFromPathName = pathname => {
+    var _pathname$match;
+
+    return pathname === null || pathname === void 0 ? void 0 : (_pathname$match = pathname.match(/\/user\/(\d+)(?:\/|$)/)) === null || _pathname$match === void 0 ? void 0 : _pathname$match[1];
+  };
+
   const user = {
     id: ""
   };
@@ -175,15 +184,6 @@
 
     setUserId(userId);
   }
-
-  const inSelfProfilePage = pathname => {
-    return new RegExp(`^\\/user\\/${getUserId()}(?:\\/|$)`).test(pathname);
-  };
-  const getUserIdFromPathName = pathname => {
-    var _pathname$match;
-
-    return pathname === null || pathname === void 0 ? void 0 : (_pathname$match = pathname.match(/\/user\/(\d+)(?:\/|$)/)) === null || _pathname$match === void 0 ? void 0 : _pathname$match[1];
-  };
 
   var key = "NovPost";
   var title = "11 月更文挑战";
@@ -2281,9 +2281,11 @@
     },
 
     async onRouteChange(prevRouterPathname, currentRouterPathname) {
-      if (!inSelfProfilePage(prevRouterPathname) && inSelfProfilePage(currentRouterPathname)) {
+      const myUserId = getUserId();
+
+      if (!inSpecificProfilePage(prevRouterPathname, myUserId) && inSpecificProfilePage(currentRouterPathname, myUserId)) {
         try {
-          const articles = await fetch(getUserId());
+          const articles = await fetch(myUserId);
           const stats = statistics(articles);
           render(stats);
         } catch (error) {

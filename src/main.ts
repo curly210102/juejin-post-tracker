@@ -1,5 +1,5 @@
 import { fetchArticleDetail, fetchArticleList } from "./utils/fetch";
-import { inSelfProfilePage } from "./utils/router";
+import { inSpecificProfilePage } from "./utils/router";
 import { getUserId, updateUserId } from "./utils/user";
 import activityData from "./activity.json";
 import nm from "nomatter";
@@ -106,12 +106,13 @@ const plugin = {
     prevRouterPathname: string,
     currentRouterPathname: string
   ) {
+    const myUserId = getUserId();
     if (
-      !inSelfProfilePage(prevRouterPathname) &&
-      inSelfProfilePage(currentRouterPathname)
+      !inSpecificProfilePage(prevRouterPathname, myUserId) &&
+      inSpecificProfilePage(currentRouterPathname, myUserId)
     ) {
       try {
-        const articles = await fetch(getUserId());
+        const articles = await fetch(myUserId);
         const stats = statistics(articles);
         render(stats);
       } catch (error) {

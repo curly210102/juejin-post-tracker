@@ -1,11 +1,9 @@
-import { getUserId } from "./user";
-
 export const inPinPage = (pathname: string) => {
   return /^\/pins(?:\/|$)/.test(pathname);
 };
 
-export const inSelfProfilePage = (pathname: string) => {
-  return new RegExp(`^\\/user\\/${getUserId()}(?:\\/|$)`).test(pathname);
+export const inSpecificProfilePage = (pathname: string, userId: string) => {
+  return new RegExp(`^\\/user\\/${userId}(?:\\/|$)`).test(pathname);
 };
 
 export const inProfilePage = (pathname: string) => {
