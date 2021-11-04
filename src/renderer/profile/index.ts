@@ -96,7 +96,7 @@ class ProfileRenderer {
   }
 
   mount() {
-    if (!this.containerEl.parent().length) {
+    if (!this.containerEl.is(":visible")) {
       const parentEl = $(".user-view .sticky-wrap");
       if (!parentEl.length) {
         setTimeout(() => this.mount(), 1000);

@@ -8,9 +8,9 @@
 // @require      tampermonkey://vendor/jquery.js
 // @match        juejin.cn
 // @connect      juejin.cn
+// @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
-// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function () {
   'use strict';
@@ -1928,7 +1928,7 @@
     }
   }
 
-  var css_248z$1 = ".style-module_block__1wMKW {\n  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);\n  margin-bottom: 1rem;\n  background-color: #fff;\n  border-radius: 2px;\n}\n\n.style-module_title__2d9pT {\n  padding: 1.333rem;\n  font-size: 1.333rem;\n  font-weight: 600;\n  color: #31445b;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n  cursor: pointer;\n}\n\n.style-module_content__1-VKy {\n  padding: 1.333rem;\n}\n\n.style-module_header__2_Vg4 {\n  margin: 0;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n}\n\n.style-module_header__2_Vg4 > a {\n  color: inherit;\n}\n\n.style-module_header__2_Vg4 > span {\n  margin-left: auto;\n  font-size: 1rem;\n  color: #8a9aa9;\n}\n\n.style-module_section__1cMQp {\n  padding-bottom: 10px;\n  margin-bottom: 20px;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n}\n\n.style-module_profileSidebar__bamb0 {\n  overflow: \"auto\";\n  height: calc(100vh - 8rem);\n  padding-right: 16px;\n}\n";
+  var css_248z$1 = ".style-module_block__1wMKW {\n  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);\n  margin-bottom: 1rem;\n  background-color: #fff;\n  border-radius: 2px;\n  user-select: none;\n}\n\n.style-module_title__2d9pT {\n  padding: 1.333rem;\n  font-size: 1.333rem;\n  font-weight: 600;\n  color: #31445b;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n  cursor: pointer;\n}\n\n.style-module_content__1-VKy {\n  padding: 1.333rem;\n}\n\n.style-module_header__2_Vg4 {\n  margin: 0;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n}\n\n.style-module_header__2_Vg4 > a {\n  color: inherit;\n}\n\n.style-module_header__2_Vg4 > span {\n  margin-left: auto;\n  font-size: 1rem;\n  color: #8a9aa9;\n}\n\n.style-module_section__1cMQp {\n  padding-bottom: 10px;\n  margin-bottom: 20px;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n}\n\n.style-module_profileSidebar__bamb0 {\n  overflow: \"auto\";\n  height: calc(100vh - 8rem);\n  padding-right: 16px;\n}\n";
   var styles$1 = {"block":"style-module_block__1wMKW","title":"style-module_title__2d9pT","content":"style-module_content__1-VKy","header":"style-module_header__2_Vg4","section":"style-module_section__1cMQp","profileSidebar":"style-module_profileSidebar__bamb0"};
   styleInject(css_248z$1);
 
@@ -2004,7 +2004,7 @@
     }
 
     mount() {
-      if (!this.containerEl.parent().length) {
+      if (!this.containerEl.is(":visible")) {
         const parentEl = $(".user-view .sticky-wrap");
 
         if (!parentEl.length) {

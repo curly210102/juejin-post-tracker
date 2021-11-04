@@ -3,6 +3,7 @@
   margin-bottom: 1rem;
   background-color: #fff;
   border-radius: 2px;
+  user-select: none;
 }
 
 .title {
