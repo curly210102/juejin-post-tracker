@@ -43,7 +43,7 @@
 }
 
 .profileSidebar {
-  overflow: "auto";
+  overflow: auto;
   height: calc(100vh - 8rem);
   padding-right: 16px;
 }

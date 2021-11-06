@@ -28,8 +28,7 @@ async function fetch(userId: string) {
       .filter(({ id, modifiedTime }) => {
         return (
           !articleContentMap.has(id) ||
-          articleContentMap.get(id)?.["modifiedTimeStamp"] !==
-            modifiedTime.valueOf()
+          articleContentMap.get(id)?.["modifiedTimeStamp"] !== modifiedTime
         );
       })
       .map(({ id }) => fetchArticleDetail(id))

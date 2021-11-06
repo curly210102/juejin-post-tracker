@@ -1,5 +1,6 @@
 export const textGray600: string
 export const textGray300: string
+export const textCenter: string
 export const statistics: string
 export const count: string
 export const hint: string
@@ -12,6 +13,8 @@ interface Namespace {
 	"text-gray-600": string,
 	"textGray300": string,
 	"text-gray-300": string,
+	"textCenter": string,
+	"text-center": string,
 	"statistics": string,
 	"count": string,
 	"hint": string,

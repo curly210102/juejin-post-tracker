@@ -62,7 +62,14 @@ const renderOneRule = (
     if (currentReward) {
       containerEl.append(renderProgress(currentReward.name!, 1));
     } else {
-      containerEl.append(renderProgress(rewards[0].name!, 0));
+      const { name, days = 0, count = 0 } = rewards[0];
+      containerEl.append(
+        renderProgress(
+          name!,
+          Math.min(1, dayCount / Math.max(1, days)) *
+            Math.min(articleCount / Math.max(1, count), 1)
+        )
+      );
     }
 
     if (nextReward) {
@@ -94,7 +101,6 @@ const renderOneRule = (
   } else {
     const reward = rewards[0];
     const { name, count = 0, days = 0, text } = reward;
-    const isPassed = articleCount > count && dayCount > days;
     if (name) {
       containerEl.append(
         renderProgress(
@@ -105,9 +111,11 @@ const renderOneRule = (
       );
     }
 
-    if (text && isPassed) {
+    if (text) {
       containerEl.append(
-        $("<p>", { class: styles["text-gray-600"] }).text(text)
+        $("<p>", { class: styles["text-gray-300"] })
+          .addClass(styles.textCenter)
+          .text(text)
       );
     }
   }

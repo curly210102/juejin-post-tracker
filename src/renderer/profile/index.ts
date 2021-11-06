@@ -103,7 +103,7 @@ class ProfileRenderer {
         return;
       }
 
-      parentEl?.addClass(styles.profileSidebar);
+      parentEl.addClass(styles.profileSidebar);
       parentEl.find(`[data-tampermonkey=${this.renderId}]`).remove();
 
       const siblingEl = $(".user-view .follow-block");

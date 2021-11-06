@@ -2,15 +2,15 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.0
+// @version      0.0.1
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
 // @match        juejin.cn
 // @connect      juejin.cn
-// @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function () {
   'use strict';
@@ -227,7 +227,8 @@
   		rewards: [
   			{
   				name: "「劳模」奖励",
-  				count: 45
+  				count: 45,
+  				text: "更文天数不限，投稿累计 ≧ 45 篇"
   			}
   		]
   	},
@@ -237,7 +238,7 @@
   			{
   				name: "终极幸运大奖",
   				count: 7,
-  				text: "可参与抽奖"
+  				text: "累计更文天数≥7天，即可参与抽奖"
   			}
   		]
   	}
@@ -1928,7 +1929,7 @@
     }
   }
 
-  var css_248z$1 = ".style-module_block__1wMKW {\n  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);\n  margin-bottom: 1rem;\n  background-color: #fff;\n  border-radius: 2px;\n  user-select: none;\n}\n\n.style-module_title__2d9pT {\n  padding: 1.333rem;\n  font-size: 1.333rem;\n  font-weight: 600;\n  color: #31445b;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n  cursor: pointer;\n}\n\n.style-module_content__1-VKy {\n  padding: 1.333rem;\n}\n\n.style-module_header__2_Vg4 {\n  margin: 0;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n}\n\n.style-module_header__2_Vg4 > a {\n  color: inherit;\n}\n\n.style-module_header__2_Vg4 > span {\n  margin-left: auto;\n  font-size: 1rem;\n  color: #8a9aa9;\n}\n\n.style-module_section__1cMQp {\n  padding-bottom: 10px;\n  margin-bottom: 20px;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n}\n\n.style-module_profileSidebar__bamb0 {\n  overflow: \"auto\";\n  height: calc(100vh - 8rem);\n  padding-right: 16px;\n}\n";
+  var css_248z$1 = ".style-module_block__1wMKW {\n  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);\n  margin-bottom: 1rem;\n  background-color: #fff;\n  border-radius: 2px;\n  user-select: none;\n}\n\n.style-module_title__2d9pT {\n  padding: 1.333rem;\n  font-size: 1.333rem;\n  font-weight: 600;\n  color: #31445b;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n  cursor: pointer;\n}\n\n.style-module_content__1-VKy {\n  padding: 1.333rem;\n}\n\n.style-module_header__2_Vg4 {\n  margin: 0;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n}\n\n.style-module_header__2_Vg4 > a {\n  color: inherit;\n}\n\n.style-module_header__2_Vg4 > span {\n  margin-left: auto;\n  font-size: 1rem;\n  color: #8a9aa9;\n}\n\n.style-module_section__1cMQp {\n  padding-bottom: 10px;\n  margin-bottom: 20px;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n}\n\n.style-module_profileSidebar__bamb0 {\n  overflow: auto;\n  height: calc(100vh - 8rem);\n  padding-right: 16px;\n}\n";
   var styles$1 = {"block":"style-module_block__1wMKW","title":"style-module_title__2d9pT","content":"style-module_content__1-VKy","header":"style-module_header__2_Vg4","section":"style-module_section__1cMQp","profileSidebar":"style-module_profileSidebar__bamb0"};
   styleInject(css_248z$1);
 
@@ -2012,7 +2013,7 @@
           return;
         }
 
-        parentEl === null || parentEl === void 0 ? void 0 : parentEl.addClass(styles$1.profileSidebar);
+        parentEl.addClass(styles$1.profileSidebar);
         parentEl.find(`[data-tampermonkey=${this.renderId}]`).remove();
         const siblingEl = $(".user-view .follow-block");
 
@@ -2046,8 +2047,8 @@
     }
   }
 
-  var css_248z = ".activity-module_text-gray-600__2RpuA {\n  color: #8a9aa9;\n}\n.activity-module_text-gray-300__39jCA {\n  color: #939aa3a3;\n}\n.activity-module_statistics__3dckC .activity-module_count__3M9TI {\n  font-size: 16px;\n}\n\n.activity-module_statistics__3dckC .activity-module_hint__3iHfR {\n  margin-top: 4px;\n}\n\n.activity-module_flex__TwuyD {\n  display: flex;\n}\n\n.activity-module_flex__TwuyD .activity-module_item__kQoGS {\n  flex: 1;\n  text-align: center;\n}\n\n.activity-module_progress__3L2_J {\n  --progress: 0;\n  border-radius: 20px;\n  padding: 0.5em 1em;\n  position: relative;\n  overflow: hidden;\n  background-color: #f4f5f5;\n}\n.activity-module_progress__3L2_J > i {\n  font-size: 1rem;\n  font-weight: 700;\n  position: relative;\n  color: hsl(0, 0%, calc((var(--progress) * 0.2 + 0.8) * 100%));\n}\n.activity-module_progress__3L2_J:before {\n  content: \"\";\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: calc(var(--progress) * 100%);\n  background-color: #007fff;\n}\n\n.activity-module_streakItem__3ITOC {\n  font-size: 1.5rem;\n  font-weight: 600;\n}\n\n.activity-module_streakItem__3ITOC > span {\n  font-size: 0.85rem;\n  font-weight: normal;\n  margin-left: 2px;\n}\n";
-  var styles = {"text-gray-600":"activity-module_text-gray-600__2RpuA","text-gray-300":"activity-module_text-gray-300__39jCA","statistics":"activity-module_statistics__3dckC","count":"activity-module_count__3M9TI","hint":"activity-module_hint__3iHfR","flex":"activity-module_flex__TwuyD","item":"activity-module_item__kQoGS","progress":"activity-module_progress__3L2_J","streakItem":"activity-module_streakItem__3ITOC","textGray600":"activity-module_text-gray-600__2RpuA","textGray300":"activity-module_text-gray-300__39jCA"};
+  var css_248z = ".activity-module_text-gray-600__2RpuA {\n  color: #8a9aa9;\n}\n.activity-module_text-gray-300__39jCA {\n  color: #939aa3a3;\n}\n.activity-module_text-center__3Ep0f {\n  text-align: center;\n}\n\n.activity-module_statistics__3dckC .activity-module_count__3M9TI {\n  font-size: 16px;\n}\n\n.activity-module_statistics__3dckC .activity-module_hint__3iHfR {\n  margin-top: 4px;\n}\n\n.activity-module_flex__TwuyD {\n  display: flex;\n}\n\n.activity-module_flex__TwuyD .activity-module_item__kQoGS {\n  flex: 1;\n  text-align: center;\n}\n\n.activity-module_progress__3L2_J {\n  --progress: 0;\n  border-radius: 20px;\n  padding: 0.5em 1em;\n  position: relative;\n  overflow: hidden;\n  background-color: #f4f5f5;\n}\n.activity-module_progress__3L2_J > i {\n  font-size: 1rem;\n  font-weight: 700;\n  position: relative;\n  color: hsl(0, 0%, calc((var(--progress) * 0.2 + 0.8) * 100%));\n}\n.activity-module_progress__3L2_J:before {\n  content: \"\";\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: calc(var(--progress) * 100%);\n  background-color: #007fff;\n}\n\n.activity-module_streakItem__3ITOC {\n  font-size: 1.75rem;\n  font-weight: 600;\n}\n\n.activity-module_streakItem__3ITOC > span {\n  font-size: 1rem;\n  font-weight: normal;\n  margin-left: 4px;\n}\n";
+  var styles = {"text-gray-600":"activity-module_text-gray-600__2RpuA","text-gray-300":"activity-module_text-gray-300__39jCA","text-center":"activity-module_text-center__3Ep0f","statistics":"activity-module_statistics__3dckC","count":"activity-module_count__3M9TI","hint":"activity-module_hint__3iHfR","flex":"activity-module_flex__TwuyD","item":"activity-module_item__kQoGS","progress":"activity-module_progress__3L2_J","streakItem":"activity-module_streakItem__3ITOC","textGray600":"activity-module_text-gray-600__2RpuA","textGray300":"activity-module_text-gray-300__39jCA","textCenter":"activity-module_text-center__3Ep0f"};
   styleInject(css_248z);
 
   var render = (_ref => {
@@ -2100,7 +2101,12 @@
       if (currentReward) {
         containerEl.append(renderProgress(currentReward.name, 1));
       } else {
-        containerEl.append(renderProgress(rewards[0].name, 0));
+        const {
+          name,
+          days = 0,
+          count = 0
+        } = rewards[0];
+        containerEl.append(renderProgress(name, Math.min(1, dayCount / Math.max(1, days)) * Math.min(articleCount / Math.max(1, count), 1)));
       }
 
       if (nextReward) {
@@ -2131,16 +2137,15 @@
         days = 0,
         text
       } = reward;
-      const isPassed = articleCount > count && dayCount > days;
 
       if (name) {
         containerEl.append(renderProgress(name, Math.min(1, dayCount / Math.max(1, days)) * Math.min(articleCount / Math.max(1, count), 1)));
       }
 
-      if (text && isPassed) {
+      if (text) {
         containerEl.append($("<p>", {
-          class: styles["text-gray-600"]
-        }).text(text));
+          class: styles["text-gray-300"]
+        }).addClass(styles.textCenter).text(text));
       }
     }
 
@@ -2196,7 +2201,7 @@
         id,
         modifiedTime
       } = _ref;
-      return !articleContentMap.has(id) || ((_articleContentMap$ge = articleContentMap.get(id)) === null || _articleContentMap$ge === void 0 ? void 0 : _articleContentMap$ge["modifiedTimeStamp"]) !== modifiedTime.valueOf();
+      return !articleContentMap.has(id) || ((_articleContentMap$ge = articleContentMap.get(id)) === null || _articleContentMap$ge === void 0 ? void 0 : _articleContentMap$ge["modifiedTimeStamp"]) !== modifiedTime;
     }).map(_ref2 => {
       let {
         id
@@ -2281,7 +2286,7 @@
     },
 
     async onRouteChange(prevRouterPathname, currentRouterPathname) {
-      const myUserId = getUserId();
+      const myUserId = getUserId(); // const myUserId = "923245497291015";
 
       if (!inSpecificProfilePage(prevRouterPathname, myUserId) && inSpecificProfilePage(currentRouterPathname, myUserId)) {
         try {
