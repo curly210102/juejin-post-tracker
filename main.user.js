@@ -2,15 +2,15 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.1
+// @version      0.0.2
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
 // @match        juejin.cn
 // @connect      juejin.cn
+// @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
-// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function () {
   'use strict';
@@ -2286,7 +2286,7 @@
     },
 
     async onRouteChange(prevRouterPathname, currentRouterPathname) {
-      const myUserId = getUserId(); // const myUserId = "923245497291015";
+      const myUserId = getUserId();
 
       if (!inSpecificProfilePage(prevRouterPathname, myUserId) && inSpecificProfilePage(currentRouterPathname, myUserId)) {
         try {
