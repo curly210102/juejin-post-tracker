@@ -75,6 +75,7 @@ export async function fetchArticleList(
             collect_count,
             digg_count,
             comment_count,
+            title,
           } = article_info;
           const { category_name } = category;
           const publishTime = new Date(ctime * 1000).valueOf();
@@ -100,6 +101,7 @@ export async function fetchArticleList(
               collect_count,
               digg_count,
               comment_count,
+              title,
             });
           }
 

@@ -8,6 +8,10 @@ export const flex: string
 export const item: string
 export const progress: string
 export const streakItem: string
+export const warningPopup: string
+export const warningPanel: string
+export const show: string
+export const hide: string
 interface Namespace {
 	"textGray600": string,
 	"text-gray-600": string,
@@ -22,6 +26,10 @@ interface Namespace {
 	"item": string,
 	"progress": string,
 	"streakItem": string,
+	"warningPopup": string,
+	"warningPanel": string,
+	"show": string,
+	"hide": string,
 }
 declare const activityModule: Namespace
 export default activityModule

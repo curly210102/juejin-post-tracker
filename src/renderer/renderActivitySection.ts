@@ -1,10 +1,11 @@
-import { TypeArticle } from "@/types/article";
+import { TypeArticle, TypeInvalidSummary } from "@/types/article";
 import { profileRenderer } from "./profile";
 import activityData from "@/activity.json";
 import styles from "./activity.module.css";
 
 type Props = {
   efficientArticles: TypeArticle[];
+  invalidSummaries: TypeInvalidSummary[];
   dayCount: number;
   totalCount: Record<"view" | "comment" | "digg" | "collect", number>;
 };
@@ -18,11 +19,17 @@ interface IRule {
     text?: string;
   }[];
 }
-export default ({ efficientArticles, dayCount, totalCount }: Props) => {
+export default ({
+  efficientArticles,
+  dayCount,
+  totalCount,
+  invalidSummaries,
+}: Props) => {
   const articleCount = efficientArticles.length;
   const containerEl = $("<div>");
 
   containerEl.append(renderStreak(articleCount, dayCount));
+  containerEl.append(renderWarning(invalidSummaries));
   activityData.rules.forEach((rule) => {
     containerEl.append(renderOneRule(rule, articleCount, dayCount));
   });
@@ -36,6 +43,48 @@ export default ({ efficientArticles, dayCount, totalCount }: Props) => {
     endTime: activityData.endTimeStamp,
     node: containerEl[0],
   });
+};
+
+const InvalidStatus2Text = {
+  time_range: "不在活动时间内",
+  category_range: "不在限定分类内",
+  word_count: "未达字数",
+  slogan_fit: "暗号文本不符",
+  link_fit: "暗号链接不符",
+};
+
+const renderWarning = (invalidSummaries: TypeInvalidSummary[]) => {
+  const popup = $("<div>", { class: styles.warningPopup });
+  const trigger = $("<a>", { class: styles.textGray600 }).text(
+    `${invalidSummaries.length} 篇`
+  );
+  const text = $("<p>", { class: styles.textGray300 }).append(
+    "⚠️ 有",
+    trigger,
+    "文章未参加活动"
+  );
+  const panel = $("<div>").addClass(styles.warningPanel);
+  trigger.on("click", (e) => {
+    e.stopPropagation();
+    panel.toggleClass(styles.show);
+  });
+
+  document.body.addEventListener("click", () => {
+    panel.removeClass(styles.show);
+  });
+
+  const list = $("<table>");
+  panel.append(list);
+  invalidSummaries.forEach(({ id, title, status }) => {
+    list.append(
+      `<tr><td><a href="https://juejin.cn/post/${id}" target="_blank" onclick="event.stopPropagation()">${title}</a></td><td>${InvalidStatus2Text[status]}</td></tr>`
+    );
+  });
+
+  popup.append(text);
+  popup.append(panel);
+
+  return popup;
 };
 
 const renderOneRule = (

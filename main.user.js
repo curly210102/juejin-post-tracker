@@ -107,7 +107,8 @@
               view_count,
               collect_count,
               digg_count,
-              comment_count
+              comment_count,
+              title
             } = article_info;
             const {
               category_name
@@ -125,7 +126,8 @@
                 view_count,
                 collect_count,
                 digg_count,
-                comment_count
+                comment_count,
+                title
               });
             }
 
@@ -2047,19 +2049,21 @@
     }
   }
 
-  var css_248z = ".activity-module_text-gray-600__2RpuA {\n  color: #8a9aa9;\n}\n.activity-module_text-gray-300__39jCA {\n  color: #939aa3a3;\n}\n.activity-module_text-center__3Ep0f {\n  text-align: center;\n}\n\n.activity-module_statistics__3dckC .activity-module_count__3M9TI {\n  font-size: 16px;\n}\n\n.activity-module_statistics__3dckC .activity-module_hint__3iHfR {\n  margin-top: 4px;\n}\n\n.activity-module_flex__TwuyD {\n  display: flex;\n}\n\n.activity-module_flex__TwuyD .activity-module_item__kQoGS {\n  flex: 1;\n  text-align: center;\n}\n\n.activity-module_progress__3L2_J {\n  --progress: 0;\n  border-radius: 20px;\n  padding: 0.5em 1em;\n  position: relative;\n  overflow: hidden;\n  background-color: #f4f5f5;\n}\n.activity-module_progress__3L2_J > i {\n  font-size: 1rem;\n  font-weight: 700;\n  position: relative;\n  color: hsl(0, 0%, calc((var(--progress) * 0.2 + 0.8) * 100%));\n}\n.activity-module_progress__3L2_J:before {\n  content: \"\";\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: calc(var(--progress) * 100%);\n  background-color: #007fff;\n}\n\n.activity-module_streakItem__3ITOC {\n  font-size: 1.75rem;\n  font-weight: 600;\n}\n\n.activity-module_streakItem__3ITOC > span {\n  font-size: 1rem;\n  font-weight: normal;\n  margin-left: 4px;\n}\n";
-  var styles = {"text-gray-600":"activity-module_text-gray-600__2RpuA","text-gray-300":"activity-module_text-gray-300__39jCA","text-center":"activity-module_text-center__3Ep0f","statistics":"activity-module_statistics__3dckC","count":"activity-module_count__3M9TI","hint":"activity-module_hint__3iHfR","flex":"activity-module_flex__TwuyD","item":"activity-module_item__kQoGS","progress":"activity-module_progress__3L2_J","streakItem":"activity-module_streakItem__3ITOC","textGray600":"activity-module_text-gray-600__2RpuA","textGray300":"activity-module_text-gray-300__39jCA","textCenter":"activity-module_text-center__3Ep0f"};
+  var css_248z = ".activity-module_text-gray-600__2RpuA {\n  color: #8a9aa9;\n}\n.activity-module_text-gray-300__39jCA {\n  color: #939aa3a3;\n}\n.activity-module_text-center__3Ep0f {\n  text-align: center;\n}\n\n.activity-module_statistics__3dckC .activity-module_count__3M9TI {\n  font-size: 16px;\n}\n\n.activity-module_statistics__3dckC .activity-module_hint__3iHfR {\n  margin-top: 4px;\n}\n\n.activity-module_flex__TwuyD {\n  display: flex;\n}\n\n.activity-module_flex__TwuyD .activity-module_item__kQoGS {\n  flex: 1;\n  text-align: center;\n}\n\n.activity-module_progress__3L2_J {\n  --progress: 0;\n  border-radius: 20px;\n  padding: 0.5em 1em;\n  position: relative;\n  overflow: hidden;\n  background-color: #f4f5f5;\n}\n.activity-module_progress__3L2_J > i {\n  font-size: 1rem;\n  font-weight: 700;\n  position: relative;\n  color: hsl(0, 0%, calc((var(--progress) * 0.2 + 0.8) * 100%));\n}\n.activity-module_progress__3L2_J:before {\n  content: \"\";\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: calc(var(--progress) * 100%);\n  background-color: #007fff;\n}\n\n.activity-module_streakItem__3ITOC {\n  font-size: 1.75rem;\n  font-weight: 600;\n}\n\n.activity-module_streakItem__3ITOC > span {\n  font-size: 1rem;\n  font-weight: normal;\n  margin-left: 4px;\n}\n\n.activity-module_warningPopup__1CWrG {\n  position: relative;\n}\n\n.activity-module_warningPanel__Xz4vb {\n  position: absolute;\n  display: none;\n  padding: 0.6rem;\n  background-color: #fff;\n  border: 1px solid #f3f3f4;\n  border-radius: 2px;\n  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);\n  z-index: 1;\n}\n\n.activity-module_show__1_pIG {\n  display: block;\n}\n\n.activity-module_hide__ZiV8Z {\n  display: none;\n}\n";
+  var styles = {"text-gray-600":"activity-module_text-gray-600__2RpuA","text-gray-300":"activity-module_text-gray-300__39jCA","text-center":"activity-module_text-center__3Ep0f","statistics":"activity-module_statistics__3dckC","count":"activity-module_count__3M9TI","hint":"activity-module_hint__3iHfR","flex":"activity-module_flex__TwuyD","item":"activity-module_item__kQoGS","progress":"activity-module_progress__3L2_J","streakItem":"activity-module_streakItem__3ITOC","warningPopup":"activity-module_warningPopup__1CWrG","warningPanel":"activity-module_warningPanel__Xz4vb","show":"activity-module_show__1_pIG","hide":"activity-module_hide__ZiV8Z","textGray600":"activity-module_text-gray-600__2RpuA","textGray300":"activity-module_text-gray-300__39jCA","textCenter":"activity-module_text-center__3Ep0f"};
   styleInject(css_248z);
 
   var render = (_ref => {
     let {
       efficientArticles,
       dayCount,
-      totalCount
+      totalCount,
+      invalidSummaries
     } = _ref;
     const articleCount = efficientArticles.length;
     const containerEl = $("<div>");
     containerEl.append(renderStreak(articleCount, dayCount));
+    containerEl.append(renderWarning(invalidSummaries));
     activityData.rules.forEach(rule => {
       containerEl.append(renderOneRule(rule, articleCount, dayCount));
     });
@@ -2073,11 +2077,51 @@
       node: containerEl[0]
     });
   });
+  const InvalidStatus2Text = {
+    time_range: "不在活动时间内",
+    category_range: "不在限定分类内",
+    word_count: "未达字数",
+    slogan_fit: "暗号文本不符",
+    link_fit: "暗号链接不符"
+  };
 
-  const renderOneRule = (_ref2, articleCount, dayCount) => {
+  const renderWarning = invalidSummaries => {
+    const popup = $("<div>", {
+      class: styles.warningPopup
+    });
+    const trigger = $("<a>", {
+      class: styles.textGray600
+    }).text(`${invalidSummaries.length} 篇`);
+    const text = $("<p>", {
+      class: styles.textGray300
+    }).append("⚠️ 有", trigger, "文章未参加活动");
+    const panel = $("<div>").addClass(styles.warningPanel);
+    trigger.on("click", e => {
+      e.stopPropagation();
+      panel.toggleClass(styles.show);
+    });
+    document.body.addEventListener("click", () => {
+      panel.removeClass(styles.show);
+    });
+    const list = $("<table>");
+    panel.append(list);
+    invalidSummaries.forEach(_ref2 => {
+      let {
+        id,
+        title,
+        status
+      } = _ref2;
+      list.append(`<tr><td><a href="https://juejin.cn/post/${id}" target="_blank" onclick="event.stopPropagation()">${title}</a></td><td>${InvalidStatus2Text[status]}</td></tr>`);
+    });
+    popup.append(text);
+    popup.append(panel);
+    return popup;
+  };
+
+  const renderOneRule = (_ref3, articleCount, dayCount) => {
     let {
       rewards
-    } = _ref2;
+    } = _ref3;
     const isLadder = rewards.length > 1;
     const containerEl = $("<p>"); // 当前奖励
     // 下一等级
@@ -2171,8 +2215,8 @@
       collect: "收藏"
     };
     const containerEl = $("<p>").addClass(styles.statistics).addClass(styles.flex);
-    Object.entries(totalCount).forEach(_ref3 => {
-      let [key, count] = _ref3;
+    Object.entries(totalCount).forEach(_ref4 => {
+      let [key, count] = _ref4;
       const itemEl = $("<div>").addClass(styles.item);
       const countEl = $("<div>").addClass(styles.count).text(`${count}`);
       const hintEl = $("<div>").addClass(styles.hint).addClass(styles["text-gray-300"]).text(`${countLocale[key]}`);
@@ -2195,13 +2239,13 @@
     } = activityData;
     const articleList = await fetchArticleList(userId, startTimeStamp, endTimeStamp, new Set(categories));
     const articleDetails = await Promise.all(articleList.filter(_ref => {
-      var _articleContentMap$ge;
+      var _articleContentMap$ge, _articleContentMap$ge2;
 
       let {
         id,
         modifiedTime
       } = _ref;
-      return !articleContentMap.has(id) || ((_articleContentMap$ge = articleContentMap.get(id)) === null || _articleContentMap$ge === void 0 ? void 0 : _articleContentMap$ge["modifiedTimeStamp"]) !== modifiedTime;
+      return !articleContentMap.has(id) || ((_articleContentMap$ge = articleContentMap.get(id)) === null || _articleContentMap$ge === void 0 ? void 0 : _articleContentMap$ge["modifiedTimeStamp"]) !== modifiedTime || ((_articleContentMap$ge2 = articleContentMap.get(id)) === null || _articleContentMap$ge2 === void 0 ? void 0 : _articleContentMap$ge2["sloganFit"]) === undefined;
     }).map(_ref2 => {
       let {
         id
@@ -2222,18 +2266,20 @@
       } = article_info;
       const content = nomatter_1(mark_content).trim();
       articleContentMap.set(article_id, {
-        isFit: content.includes(signSlogan) && new RegExp(`${signLink}((?:\/|$)?)`).test(content),
+        sloganFit: content.includes(signSlogan),
+        linkFit: new RegExp(`${signLink}((?:\/|$)?)`).test(content),
         count: dist.countWords(mark_content),
         modifiedTimeStamp: mtime * 1000
       });
     });
     saveToStorage(articleStoragePath, Object.fromEntries(articleContentMap));
     return articleList.map(article => {
-      var _contentInfo$isFit, _contentInfo$count;
+      var _contentInfo$sloganFi, _contentInfo$linkFit, _contentInfo$count;
 
       const contentInfo = articleContentMap.get(article.id);
       return { ...article,
-        isFit: (_contentInfo$isFit = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.isFit) !== null && _contentInfo$isFit !== void 0 ? _contentInfo$isFit : false,
+        sloganFit: (_contentInfo$sloganFi = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.sloganFit) !== null && _contentInfo$sloganFi !== void 0 ? _contentInfo$sloganFi : false,
+        linkFit: (_contentInfo$linkFit = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.linkFit) !== null && _contentInfo$linkFit !== void 0 ? _contentInfo$linkFit : false,
         count: (_contentInfo$count = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.count) !== null && _contentInfo$count !== void 0 ? _contentInfo$count : 0
       };
     });
@@ -2245,8 +2291,65 @@
       wordCount,
       categories
     } = activityData;
-    const efficientArticles = articles.filter(article => {
-      return article.publishTime > startTimeStamp && categories.includes(article.category) && article.count >= wordCount && article.isFit;
+    const efficientArticles = [];
+    const invalidSummaries = [];
+    articles.forEach(article => {
+      const {
+        id,
+        title,
+        publishTime,
+        category,
+        count,
+        sloganFit,
+        linkFit
+      } = article;
+
+      if (publishTime < startTimeStamp) {
+        invalidSummaries.push({
+          id,
+          title,
+          status: "time_range"
+        });
+        return;
+      }
+
+      if (!categories.includes(category)) {
+        invalidSummaries.push({
+          id,
+          title,
+          status: "category_range"
+        });
+        return;
+      }
+
+      if (count < wordCount) {
+        invalidSummaries.push({
+          id,
+          title,
+          status: "word_count"
+        });
+        return;
+      }
+
+      if (!sloganFit) {
+        invalidSummaries.push({
+          id,
+          title,
+          status: "slogan_fit"
+        });
+        return;
+      }
+
+      if (!linkFit) {
+        invalidSummaries.push({
+          id,
+          title,
+          status: "link_fit"
+        });
+        return;
+      }
+
+      efficientArticles.push(article);
     });
     const publishTimeGroup = [];
     const totalCount = {
@@ -2276,7 +2379,8 @@
     return {
       totalCount,
       dayCount,
-      efficientArticles
+      efficientArticles,
+      invalidSummaries
     };
   }
 

@@ -7,7 +7,11 @@ import { countWords } from "@homegrown/word-counter";
 import { initStorage, saveToStorage } from "./utils/storage";
 import renderErrorMessage from "./renderer/renderErrorMessage";
 import render from "./renderer/renderActivitySection";
-import { TypeArticle, IArticleContentItem } from "./types/article";
+import {
+  TypeArticle,
+  IArticleContentItem,
+  TypeInvalidSummary,
+} from "./types/article";
 
 const articleStoragePath = `juejin-post-tracker/article_contents`;
 const articleContentMap = new Map<string, IArticleContentItem>(
@@ -28,7 +32,8 @@ async function fetch(userId: string) {
       .filter(({ id, modifiedTime }) => {
         return (
           !articleContentMap.has(id) ||
-          articleContentMap.get(id)?.["modifiedTimeStamp"] !== modifiedTime
+          articleContentMap.get(id)?.["modifiedTimeStamp"] !== modifiedTime ||
+          articleContentMap.get(id)?.["sloganFit"] === undefined
         );
       })
       .map(({ id }) => fetchArticleDetail(id))
@@ -38,9 +43,8 @@ async function fetch(userId: string) {
     const { article_id, mark_content, mtime } = article_info;
     const content = nm(mark_content).trim();
     articleContentMap.set(article_id, {
-      isFit:
-        content.includes(signSlogan) &&
-        new RegExp(`${signLink}((?:\/|$)?)`).test(content),
+      sloganFit: content.includes(signSlogan),
+      linkFit: new RegExp(`${signLink}((?:\/|$)?)`).test(content),
       count: countWords(mark_content),
       modifiedTimeStamp: mtime * 1000,
     });
@@ -52,7 +56,8 @@ async function fetch(userId: string) {
     const contentInfo = articleContentMap.get(article.id);
     return {
       ...article,
-      isFit: contentInfo?.isFit ?? false,
+      sloganFit: contentInfo?.sloganFit ?? false,
+      linkFit: contentInfo?.linkFit ?? false,
       count: contentInfo?.count ?? 0,
     };
   });
@@ -61,13 +66,58 @@ async function fetch(userId: string) {
 function statistics(articles: TypeArticle[]) {
   const { startTimeStamp, wordCount, categories } = activityData;
 
-  const efficientArticles = articles.filter((article) => {
-    return (
-      article.publishTime > startTimeStamp &&
-      categories.includes(article.category) &&
-      article.count >= wordCount &&
-      article.isFit
-    );
+  const efficientArticles: TypeArticle[] = [];
+  const invalidSummaries: TypeInvalidSummary[] = [];
+
+  articles.forEach((article) => {
+    const { id, title, publishTime, category, count, sloganFit, linkFit } =
+      article;
+    if (publishTime < startTimeStamp) {
+      invalidSummaries.push({
+        id,
+        title,
+        status: "time_range",
+      });
+      return;
+    }
+
+    if (!categories.includes(category)) {
+      invalidSummaries.push({
+        id,
+        title,
+        status: "category_range",
+      });
+      return;
+    }
+
+    if (count < wordCount) {
+      invalidSummaries.push({
+        id,
+        title,
+        status: "word_count",
+      });
+      return;
+    }
+
+    if (!sloganFit) {
+      invalidSummaries.push({
+        id,
+        title,
+        status: "slogan_fit",
+      });
+      return;
+    }
+
+    if (!linkFit) {
+      invalidSummaries.push({
+        id,
+        title,
+        status: "link_fit",
+      });
+      return;
+    }
+
+    efficientArticles.push(article);
   });
   const publishTimeGroup: number[] = [];
   const totalCount = {
@@ -94,6 +144,7 @@ function statistics(articles: TypeArticle[]) {
     totalCount,
     dayCount,
     efficientArticles,
+    invalidSummaries,
   };
 }
 
