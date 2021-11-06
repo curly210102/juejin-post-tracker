@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.2
+// @version      0.0.3
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
