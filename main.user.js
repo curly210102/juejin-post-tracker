@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.3
+// @version      0.0.4
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
@@ -40,7 +40,8 @@
         responseType: "json",
         headers: {
           "User-agent": window.navigator.userAgent,
-          "content-type": "application/json"
+          "content-type": "application/json",
+          origin: ""
         },
         onload: function (_ref2) {
           let {

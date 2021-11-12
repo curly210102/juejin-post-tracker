@@ -16,6 +16,7 @@ export function fetchData({ url = "", userId = "", data = {} }): Promise<{
       headers: {
         "User-agent": window.navigator.userAgent,
         "content-type": "application/json",
+        origin: "",
       },
       onload: function ({ status, response }) {
         if (status === 200) {
