@@ -48,7 +48,6 @@ export async function fetchArticleList(
   userId: string,
   startTimeStamp: number,
   endTimeStamp: number,
-  categories: Set<string>,
   requestData = {}
 ) {
   return await request();
@@ -90,7 +89,6 @@ export async function fetchArticleList(
           if (
             publishTime >= startTimeStamp &&
             publishTime <= endTimeStamp &&
-            categories.has(category_name) &&
             verify !== 2
           ) {
             articles.push({

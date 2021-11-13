@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.5
+// @version      0.0.6
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
@@ -68,8 +68,8 @@
       });
     });
   }
-  async function fetchArticleList(userId, startTimeStamp, endTimeStamp, categories) {
-    let requestData = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
+  async function fetchArticleList(userId, startTimeStamp, endTimeStamp) {
+    let requestData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
     return await request();
 
     async function request() {
@@ -119,7 +119,7 @@
             const modifiedTime = new Date(mtime * 1000).valueOf();
             const verify = verify_status === 0 ? 0 : audit_status === 2 && verify_status === 1 ? 1 : 2;
 
-            if (publishTime >= startTimeStamp && publishTime <= endTimeStamp && categories.has(category_name) && verify !== 2) {
+            if (publishTime >= startTimeStamp && publishTime <= endTimeStamp && verify !== 2) {
               articles.push({
                 category: category_name,
                 id: article_id,
@@ -161,15 +161,6 @@
     return pathname === null || pathname === void 0 ? void 0 : (_pathname$match = pathname.match(/\/user\/(\d+)(?:\/|$)/)) === null || _pathname$match === void 0 ? void 0 : _pathname$match[1];
   };
 
-  const user = {
-    id: ""
-  };
-  function getUserId() {
-    return user.id;
-  }
-  function setUserId(userId) {
-    user.id = userId;
-  }
   function updateUserId() {
     var _userProfileEl$getAtt;
 
@@ -179,8 +170,6 @@
     if (!userId) {
       return;
     }
-
-    setUserId(userId);
   }
 
   var key = "NovPost";
@@ -2229,11 +2218,10 @@
     const {
       startTimeStamp,
       endTimeStamp,
-      categories,
       signSlogan,
       signLink
     } = activityData;
-    const articleList = await fetchArticleList(userId, startTimeStamp, endTimeStamp, new Set(categories));
+    const articleList = await fetchArticleList(userId, startTimeStamp, endTimeStamp);
     const articleDetails = await Promise.all(articleList.filter(_ref => {
       var _articleContentMap$ge, _articleContentMap$ge2;
 
@@ -2386,7 +2374,7 @@
     },
 
     async onRouteChange(prevRouterPathname, currentRouterPathname) {
-      const myUserId = getUserId();
+      const myUserId = "2894361621692792";
 
       if (!inSpecificProfilePage(prevRouterPathname, myUserId) && inSpecificProfilePage(currentRouterPathname, myUserId)) {
         try {

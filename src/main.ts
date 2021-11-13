@@ -19,14 +19,13 @@ const articleContentMap = new Map<string, IArticleContentItem>(
 );
 
 async function fetch(userId: string) {
-  const { startTimeStamp, endTimeStamp, categories, signSlogan, signLink } =
-    activityData;
+  const { startTimeStamp, endTimeStamp, signSlogan, signLink } = activityData;
   const articleList = await fetchArticleList(
     userId,
     startTimeStamp,
-    endTimeStamp,
-    new Set(categories)
+    endTimeStamp
   );
+
   const articleDetails = await Promise.all(
     articleList
       .filter(({ id, modifiedTime }) => {
@@ -156,7 +155,7 @@ const plugin = {
     prevRouterPathname: string,
     currentRouterPathname: string
   ) {
-    const myUserId = getUserId();
+    const myUserId = "2894361621692792";
     if (
       !inSpecificProfilePage(prevRouterPathname, myUserId) &&
       inSpecificProfilePage(currentRouterPathname, myUserId)
