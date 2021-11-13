@@ -155,7 +155,7 @@ const plugin = {
     prevRouterPathname: string,
     currentRouterPathname: string
   ) {
-    const myUserId = "2894361621692792";
+    const myUserId = getUserId();
     if (
       !inSpecificProfilePage(prevRouterPathname, myUserId) &&
       inSpecificProfilePage(currentRouterPathname, myUserId)
