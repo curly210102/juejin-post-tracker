@@ -2,15 +2,15 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.4
+// @version      0.0.5
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
 // @match        juejin.cn
 // @connect      juejin.cn
-// @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function () {
   'use strict';
@@ -97,7 +97,8 @@
             const {
               article_id,
               article_info,
-              category
+              category,
+              user_interact
             } = article; // 文章字数、内容、发布时间、评论、点赞、收藏、阅读数
 
             const {
@@ -126,16 +127,10 @@
                 modifiedTime,
                 view_count,
                 collect_count,
-                digg_count,
+                digg_count: digg_count - (user_interact.is_digg ? 1 : 0),
                 comment_count,
                 title
               });
-            }
-
-            lastPublishTime = publishTime;
-
-            if (lastPublishTime < startTimeStamp) {
-              break;
             }
           }
         }
