@@ -2,15 +2,15 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.6
+// @version      0.0.7
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
 // @match        juejin.cn
 // @connect      juejin.cn
+// @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
-// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function () {
   'use strict';
@@ -161,6 +161,15 @@
     return pathname === null || pathname === void 0 ? void 0 : (_pathname$match = pathname.match(/\/user\/(\d+)(?:\/|$)/)) === null || _pathname$match === void 0 ? void 0 : _pathname$match[1];
   };
 
+  const user = {
+    id: ""
+  };
+  function getUserId() {
+    return user.id;
+  }
+  function setUserId(userId) {
+    user.id = userId;
+  }
   function updateUserId() {
     var _userProfileEl$getAtt;
 
@@ -170,6 +179,8 @@
     if (!userId) {
       return;
     }
+
+    setUserId(userId);
   }
 
   var key = "NovPost";
@@ -2374,7 +2385,7 @@
     },
 
     async onRouteChange(prevRouterPathname, currentRouterPathname) {
-      const myUserId = "2894361621692792";
+      const myUserId = getUserId();
 
       if (!inSpecificProfilePage(prevRouterPathname, myUserId) && inSpecificProfilePage(currentRouterPathname, myUserId)) {
         try {
