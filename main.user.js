@@ -183,24 +183,25 @@
     setUserId(userId);
   }
 
-  var key = "NovPost";
-  var title = "11 月更文挑战";
-  var docLink = "https://juejin.cn/post/7023643374569816095";
+  var key = "2022FirstPost";
+  var title = "2022首次更文挑战";
+  var docLink = "https://juejin.cn/post/7052884569032392740";
   var categories = [
   	"前端",
   	"后端",
   	"Android",
   	"iOS",
-  	"人工智能"
+  	"人工智能",
+  	"开发工具"
   ];
-  var startTimeStamp = 1635696000000;
-  var endTimeStamp = 1638287999999;
-  var signSlogan = "2021最后一次更文挑战";
-  var signLink = "https://juejin.cn/post/7023643374569816095";
+  var startTimeStamp = 1642435200000;
+  var endTimeStamp = 1646063999000;
+  var signSlogan = "2022首次更文挑战";
+  var signLink = "https://juejin.cn/post/7052884569032392740";
   var wordCount = 500;
   var rules = [
   	{
-  		title: "等级关卡",
+  		title: "进度追踪",
   		rewards: [
   			{
   				name: "第一关",
@@ -217,26 +218,10 @@
   			{
   				name: "第四关",
   				days: 28
-  			}
-  		]
-  	},
-  	{
-  		title: "「劳模」奖励",
-  		rewards: [
+  			},
   			{
-  				name: "「劳模」奖励",
-  				count: 45,
-  				text: "更文天数不限，投稿累计 ≧ 45 篇"
-  			}
-  		]
-  	},
-  	{
-  		title: "终极幸运大奖",
-  		rewards: [
-  			{
-  				name: "终极幸运大奖",
-  				count: 7,
-  				text: "累计更文天数≥7天，即可参与抽奖"
+  				name: "全勤奖",
+  				days: 40
   			}
   		]
   	}
@@ -2045,8 +2030,8 @@
     }
   }
 
-  var css_248z = ".activity-module_text-gray-600__2RpuA {\n  color: #8a9aa9;\n}\n.activity-module_text-gray-300__39jCA {\n  color: #939aa3a3;\n}\n.activity-module_text-center__3Ep0f {\n  text-align: center;\n}\n\n.activity-module_statistics__3dckC .activity-module_count__3M9TI {\n  font-size: 16px;\n}\n\n.activity-module_statistics__3dckC .activity-module_hint__3iHfR {\n  margin-top: 4px;\n}\n\n.activity-module_flex__TwuyD {\n  display: flex;\n}\n\n.activity-module_flex__TwuyD .activity-module_item__kQoGS {\n  flex: 1;\n  text-align: center;\n}\n\n.activity-module_progress__3L2_J {\n  --progress: 0;\n  border-radius: 20px;\n  padding: 0.5em 1em;\n  position: relative;\n  overflow: hidden;\n  background-color: #f4f5f5;\n}\n.activity-module_progress__3L2_J > i {\n  font-size: 1rem;\n  font-weight: 700;\n  position: relative;\n  color: hsl(0, 0%, calc((var(--progress) * 0.2 + 0.8) * 100%));\n}\n.activity-module_progress__3L2_J:before {\n  content: \"\";\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: calc(var(--progress) * 100%);\n  background-color: #007fff;\n}\n\n.activity-module_streakItem__3ITOC {\n  font-size: 1.75rem;\n  font-weight: 600;\n}\n\n.activity-module_streakItem__3ITOC > span {\n  font-size: 1rem;\n  font-weight: normal;\n  margin-left: 4px;\n}\n\n.activity-module_warningPopup__1CWrG {\n  position: relative;\n}\n\n.activity-module_warningPanel__Xz4vb {\n  position: absolute;\n  display: none;\n  padding: 0.6rem;\n  background-color: #fff;\n  border: 1px solid #f3f3f4;\n  border-radius: 2px;\n  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);\n  z-index: 1;\n}\n\n.activity-module_show__1_pIG {\n  display: block;\n}\n\n.activity-module_hide__ZiV8Z {\n  display: none;\n}\n";
-  var styles = {"text-gray-600":"activity-module_text-gray-600__2RpuA","text-gray-300":"activity-module_text-gray-300__39jCA","text-center":"activity-module_text-center__3Ep0f","statistics":"activity-module_statistics__3dckC","count":"activity-module_count__3M9TI","hint":"activity-module_hint__3iHfR","flex":"activity-module_flex__TwuyD","item":"activity-module_item__kQoGS","progress":"activity-module_progress__3L2_J","streakItem":"activity-module_streakItem__3ITOC","warningPopup":"activity-module_warningPopup__1CWrG","warningPanel":"activity-module_warningPanel__Xz4vb","show":"activity-module_show__1_pIG","hide":"activity-module_hide__ZiV8Z","textGray600":"activity-module_text-gray-600__2RpuA","textGray300":"activity-module_text-gray-300__39jCA","textCenter":"activity-module_text-center__3Ep0f"};
+  var css_248z = ".activity-module_text-gray-600__2RpuA {\n  color: #8a9aa9;\n}\n.activity-module_text-gray-300__39jCA {\n  color: #939aa3a3;\n}\n.activity-module_text-center__3Ep0f {\n  text-align: center;\n}\n\n.activity-module_statistics__3dckC {\n  margin-top: 10px;\n}\n.activity-module_statistics__3dckC .activity-module_count__3M9TI {\n  font-size: 16px;\n}\n\n.activity-module_statistics__3dckC .activity-module_hint__3iHfR {\n  margin-top: 4px;\n}\n\n.activity-module_flex__TwuyD {\n  display: flex;\n}\n\n.activity-module_flex__TwuyD .activity-module_item__kQoGS {\n  flex: 1;\n  text-align: center;\n}\n\n.activity-module_progress__3L2_J {\n  --progress: 0;\n  border-radius: 20px;\n  padding: 0.5em 1em;\n  position: relative;\n  overflow: hidden;\n  background-color: #f4f5f5;\n}\n.activity-module_progress__3L2_J > i {\n  font-size: 1rem;\n  font-weight: 700;\n  position: relative;\n  color: hsl(0, 0%, calc((var(--progress) * 0.2 + 0.8) * 100%));\n}\n.activity-module_progress__3L2_J:before {\n  content: \"\";\n  position: absolute;\n  background-color: rgba(255, 255, 255, 0.25);\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: calc(var(--progress) * 100%);\n  background-color: #007fff;\n}\n\n.activity-module_streakItem__3ITOC {\n  font-size: 1.75rem;\n  font-weight: 600;\n}\n\n.activity-module_streakItem__3ITOC > span {\n  font-size: 1rem;\n  font-weight: normal;\n  margin-left: 4px;\n}\n\n.activity-module_warningPopup__1CWrG {\n  position: relative;\n}\n\n.activity-module_warningPanel__Xz4vb {\n  position: absolute;\n  display: none;\n  padding: 0.6rem;\n  background-color: #fff;\n  border: 1px solid #f3f3f4;\n  border-radius: 2px;\n  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%);\n  z-index: 1;\n}\n\n.activity-module_show__1_pIG {\n  display: block;\n}\n\n.activity-module_hide__ZiV8Z {\n  display: none;\n}\n\n.activity-module_encourageHeader__1pv8F {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.activity-module_encourageHeader__1pv8F > h3 {\n  margin-bottom: 0.5em;\n}\n.activity-module_encourageHeader__1pv8F > a {\n  color: #8a9aa9;\n}\n\n.activity-module_encourageEditor__1dr8y {\n  border-radius: 4px;\n  border: 1px solid #f4f5f5;\n  padding: 6px;\n  color: #31445b;\n}\n\n.activity-module_encouragePreview__UwssD {\n  margin: 0;\n  line-height: 1.5;\n  font-weight: 500;\n  color: rgb(72 161 254);\n  letter-spacing: 1px;\n}\n";
+  var styles = {"text-gray-600":"activity-module_text-gray-600__2RpuA","text-gray-300":"activity-module_text-gray-300__39jCA","text-center":"activity-module_text-center__3Ep0f","statistics":"activity-module_statistics__3dckC","count":"activity-module_count__3M9TI","hint":"activity-module_hint__3iHfR","flex":"activity-module_flex__TwuyD","item":"activity-module_item__kQoGS","progress":"activity-module_progress__3L2_J","streakItem":"activity-module_streakItem__3ITOC","warningPopup":"activity-module_warningPopup__1CWrG","warningPanel":"activity-module_warningPanel__Xz4vb","show":"activity-module_show__1_pIG","hide":"activity-module_hide__ZiV8Z","encourageHeader":"activity-module_encourageHeader__1pv8F","encourageEditor":"activity-module_encourageEditor__1dr8y","encouragePreview":"activity-module_encouragePreview__UwssD","textGray600":"activity-module_text-gray-600__2RpuA","textGray300":"activity-module_text-gray-300__39jCA","textCenter":"activity-module_text-center__3Ep0f"};
   styleInject(css_248z);
 
   var render = (_ref => {
@@ -2059,11 +2044,16 @@
     const articleCount = efficientArticles.length;
     const containerEl = $("<div>");
     containerEl.append(renderStreak(articleCount, dayCount));
-    containerEl.append(renderWarning(invalidSummaries));
+
+    if (invalidSummaries.length > 0) {
+      containerEl.append(renderWarning(invalidSummaries));
+    }
+
     activityData.rules.forEach(rule => {
       containerEl.append(renderOneRule(rule, articleCount, dayCount));
     });
     containerEl.append(renderStatistics(totalCount));
+    containerEl.append(renderEncourage());
     profileRenderer.add({
       key: activityData.key,
       title: activityData.title,
@@ -2162,7 +2152,7 @@
           class: styles["text-gray-600"]
         }).addClass(styles.item).text(`下一等级：${name}`)).append($("<div>", {
           class: styles["text-gray-300"]
-        }).addClass(styles.item).text(nextRuleText ? `需要更文 ${nextRuleText}` : ""));
+        }).addClass(styles.item).text(nextRuleText ? `目标：更文 ${nextRuleText}` : ""));
         containerEl.append(nextRewardEl);
       }
 
@@ -2221,6 +2211,79 @@
     });
     return containerEl[0];
   };
+
+  function renderEncourage() {
+    const containerEl = $("<section>");
+    const $header = $("<header>").addClass(styles["encourageHeader"]);
+    containerEl.append($header.append($("<h3>").addClass(styles["text-gray-600"]).text("我的目标")));
+    const storageName = "post_target";
+    const writtenTarget = getFromStorage(storageName);
+    const $targetPreview = $("<p>").addClass(styles["encouragePreview"]).text(writtenTarget !== null && writtenTarget !== void 0 ? writtenTarget : "从简单文章开始练习，一步一步养成写作习惯");
+    containerEl.append($targetPreview);
+
+    if (!writtenTarget) {
+      const $actionBtn = $("<a>").text("设定");
+      const $targetEditor = $("<textarea>").addClass(styles["encourageEditor"]).attr("placeholder", "设定目标，回车确定");
+
+      function submitNewTarget() {
+        var _$targetEditor$val;
+
+        const newTarget = (_$targetEditor$val = $targetEditor.val()) === null || _$targetEditor$val === void 0 ? void 0 : _$targetEditor$val.toString().trim();
+
+        if (newTarget) {
+          const confirmed = confirm(`确认设定目标: ${newTarget}`);
+
+          if (confirmed) {
+            saveToStorage(storageName, newTarget);
+            $targetPreview.text(newTarget);
+            $targetEditor.remove();
+            $actionBtn.remove();
+          }
+        }
+
+        $targetEditor.hide();
+        $targetPreview.show();
+      }
+
+      function quitNewTarget() {
+        var _$targetEditor$val2;
+
+        const newTarget = (_$targetEditor$val2 = $targetEditor.val()) === null || _$targetEditor$val2 === void 0 ? void 0 : _$targetEditor$val2.toString().trim();
+        console.log(newTarget);
+
+        if (!newTarget || confirm(`确认放弃编辑？`)) {
+          $targetEditor.val("").hide();
+          $targetPreview.show();
+        } else {
+          $targetEditor.trigger("focus");
+        }
+      }
+
+      $targetEditor.on("keydown", event => {
+        if (event.key == "Enter") {
+          event.preventDefault();
+          submitNewTarget();
+        } else if (event.key == "Escape") {
+          event.preventDefault();
+          quitNewTarget();
+        }
+      });
+      $targetEditor.on("blur", () => {
+        $targetEditor.hide();
+        $targetPreview.show();
+      });
+      $targetEditor.hide();
+      containerEl.append($targetEditor);
+      $actionBtn.on("click", () => {
+        $targetPreview.hide();
+        $targetEditor.show();
+        $targetEditor.trigger("focus");
+      });
+      $header.append($actionBtn);
+    }
+
+    return containerEl[0];
+  }
 
   const articleStoragePath = `juejin-post-tracker/article_contents`;
   const articleContentMap = new Map(Object.entries(initStorage(articleStoragePath, 1, [])));

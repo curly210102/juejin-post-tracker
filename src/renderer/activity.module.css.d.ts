@@ -12,6 +12,9 @@ export const warningPopup: string
 export const warningPanel: string
 export const show: string
 export const hide: string
+export const encourageHeader: string
+export const encourageEditor: string
+export const encouragePreview: string
 interface Namespace {
 	"textGray600": string,
 	"text-gray-600": string,
@@ -30,6 +33,9 @@ interface Namespace {
 	"warningPanel": string,
 	"show": string,
 	"hide": string,
+	"encourageHeader": string,
+	"encourageEditor": string,
+	"encouragePreview": string,
 }
 declare const activityModule: Namespace
 export default activityModule

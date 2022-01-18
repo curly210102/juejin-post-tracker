@@ -1,16 +1,16 @@
 {
-  "key": "NovPost",
-  "title": "11 月更文挑战",
-  "docLink": "https://juejin.cn/post/7023643374569816095",
-  "categories": ["前端", "后端", "Android", "iOS", "人工智能"],
-  "startTimeStamp": 1635696000000,
-  "endTimeStamp": 1638287999999,
-  "signSlogan": "2021最后一次更文挑战",
-  "signLink": "https://juejin.cn/post/7023643374569816095",
+  "key": "2022FirstPost",
+  "title": "2022首次更文挑战",
+  "docLink": "https://juejin.cn/post/7052884569032392740",
+  "categories": ["前端", "后端", "Android", "iOS", "人工智能", "开发工具"],
+  "startTimeStamp": 1642435200000,
+  "endTimeStamp": 1646063999000,
+  "signSlogan": "2022首次更文挑战",
+  "signLink": "https://juejin.cn/post/7052884569032392740",
   "wordCount": 500,
   "rules": [
     {
-      "title": "等级关卡",
+      "title": "进度追踪",
       "rewards": [
         {
           "name": "第一关",
@@ -27,26 +27,10 @@
         {
           "name": "第四关",
           "days": 28
-        }
-      ]
-    },
-    {
-      "title": "「劳模」奖励",
-      "rewards": [
+        },
         {
-          "name": "「劳模」奖励",
-          "count": 45,
-          "text": "更文天数不限，投稿累计 ≧ 45 篇"
-        }
-      ]
-    },
-    {
-      "title": "终极幸运大奖",
-      "rewards": [
-        {
-          "name": "终极幸运大奖",
-          "count": 7,
-          "text": "累计更文天数≥7天，即可参与抽奖"
+          "name": "全勤奖",
+          "days": 40
         }
       ]
     }

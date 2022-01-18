@@ -2,6 +2,7 @@ import { TypeArticle, TypeInvalidSummary } from "@/types/article";
 import { profileRenderer } from "./profile";
 import activityData from "@/activity.json";
 import styles from "./activity.module.css";
+import { getFromStorage, saveToStorage } from "@/utils/storage";
 
 type Props = {
   efficientArticles: TypeArticle[];
@@ -29,11 +30,14 @@ export default ({
   const containerEl = $("<div>");
 
   containerEl.append(renderStreak(articleCount, dayCount));
-  containerEl.append(renderWarning(invalidSummaries));
+  if (invalidSummaries.length > 0) {
+    containerEl.append(renderWarning(invalidSummaries));
+  }
   activityData.rules.forEach((rule) => {
     containerEl.append(renderOneRule(rule, articleCount, dayCount));
   });
   containerEl.append(renderStatistics(totalCount));
+  containerEl.append(renderEncourage());
 
   profileRenderer.add({
     key: activityData.key,
@@ -138,7 +142,7 @@ const renderOneRule = (
         .append(
           $("<div>", { class: styles["text-gray-300"] })
             .addClass(styles.item)
-            .text(nextRuleText ? `需要更文 ${nextRuleText}` : "")
+            .text(nextRuleText ? `目标：更文 ${nextRuleText}` : "")
         );
 
       containerEl.append(nextRewardEl);
@@ -225,3 +229,76 @@ const renderStatistics = (totalCount: Props["totalCount"]) => {
   });
   return containerEl[0];
 };
+
+function renderEncourage() {
+  const containerEl = $("<section>");
+
+  const $header = $("<header>").addClass(styles["encourageHeader"]);
+  containerEl.append(
+    $header.append($("<h3>").addClass(styles["text-gray-600"]).text("我的目标"))
+  );
+
+  const storageName = "post_target";
+  const writtenTarget = getFromStorage(storageName);
+  const $targetPreview = $("<p>")
+    .addClass(styles["encouragePreview"])
+    .text(writtenTarget ?? "从简单文章开始练习，一步一步养成写作习惯");
+  containerEl.append($targetPreview);
+
+  if (!writtenTarget) {
+    const $actionBtn = $("<a>").text("设定");
+    const $targetEditor = ($("<textarea>") as JQuery<HTMLTextAreaElement>)
+      .addClass(styles["encourageEditor"])
+      .attr("placeholder", "设定目标，回车确定");
+
+    function submitNewTarget() {
+      const newTarget = $targetEditor.val()?.toString().trim();
+
+      if (newTarget) {
+        const confirmed = confirm(`确认设定目标: ${newTarget}`);
+        if (confirmed) {
+          saveToStorage(storageName, newTarget);
+          $targetPreview.text(newTarget);
+          $targetEditor.remove();
+          $actionBtn.remove();
+        }
+      }
+      $targetEditor.hide();
+      $targetPreview.show();
+    }
+    function quitNewTarget() {
+      const newTarget = $targetEditor.val()?.toString().trim();
+      console.log(newTarget);
+      if (!newTarget || confirm(`确认放弃编辑？`)) {
+        $targetEditor.val("").hide();
+        $targetPreview.show();
+      } else {
+        $targetEditor.trigger("focus");
+      }
+    }
+    $targetEditor.on("keydown", (event) => {
+      if (event.key == "Enter") {
+        event.preventDefault();
+        submitNewTarget();
+      } else if (event.key == "Escape") {
+        event.preventDefault();
+        quitNewTarget();
+      }
+    });
+    $targetEditor.on("blur", () => {
+      $targetEditor.hide();
+      $targetPreview.show();
+    });
+    $targetEditor.hide();
+    containerEl.append($targetEditor);
+
+    $actionBtn.on("click", () => {
+      $targetPreview.hide();
+      $targetEditor.show();
+      $targetEditor.trigger("focus");
+    });
+    $header.append($actionBtn);
+  }
+
+  return containerEl[0];
+}
