@@ -64,10 +64,12 @@ const renderWarning = (invalidSummaries: TypeInvalidSummary[]) => {
     "文章未参加活动"
   );
   const panel = $("<div>").addClass(styles.warningPanel);
-  trigger.on("click", (e) => {
-    e.stopPropagation();
-    panel.toggleClass(styles.show);
-  });
+  if (invalidSummaries.length > 0) {
+    trigger.on("click", (e) => {
+      e.stopPropagation();
+      panel.toggleClass(styles.show);
+    });
+  }
 
   document.body.addEventListener("click", () => {
     panel.removeClass(styles.show);

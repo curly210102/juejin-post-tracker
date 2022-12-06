@@ -42,7 +42,7 @@ async function fetch(userId: string) {
     const { article_id, mark_content, mtime } = article_info;
     const content = nm(mark_content).trim();
     articleContentMap.set(article_id, {
-      sloganFit: content.includes(signSlogan),
+      sloganFit: new RegExp(signSlogan).test(content),
       linkFit: new RegExp(`${signLink}((?:\/|$)?)`).test(content),
       count: countWords(mark_content),
       modifiedTimeStamp: mtime * 1000,
@@ -147,30 +147,37 @@ function statistics(articles: TypeArticle[]) {
   };
 }
 
+async function renderStats (myUserId: string) {
+  try {
+    const articles = await fetch(myUserId);
+    const stats = statistics(articles);
+    render(stats);
+  } catch (error) {
+    if (error instanceof Error) {
+      renderErrorMessage(error);
+    } else {
+      console.log(error);
+    }
+  }
+}
+
 const plugin = {
   onLoaded() {
-    updateUserId();
+    updateUserId().then(() => {
+      const myUserId = getUserId();
+      renderStats(myUserId);
+    });
   },
   async onRouteChange(
     prevRouterPathname: string,
     currentRouterPathname: string
   ) {
-    const myUserId = "2894361621692792";
+    const myUserId = getUserId();
     if (
       !inSpecificProfilePage(prevRouterPathname, myUserId) &&
       inSpecificProfilePage(currentRouterPathname, myUserId)
     ) {
-      try {
-        const articles = await fetch(myUserId);
-        const stats = statistics(articles);
-        render(stats);
-      } catch (error) {
-        if (error instanceof Error) {
-          renderErrorMessage(error);
-        } else {
-          console.log(error);
-        }
-      }
+      renderStats(myUserId);
     }
   },
 };

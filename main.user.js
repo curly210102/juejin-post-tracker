@@ -2,15 +2,15 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.6
+// @version      0.0.7
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
 // @match        juejin.cn
 // @connect      juejin.cn
+// @grant        GM_xmlhttpRequest
 // @grant        GM_setValue
 // @grant        GM_getValue
-// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function () {
   'use strict';
@@ -161,20 +161,67 @@
     return pathname === null || pathname === void 0 ? void 0 : (_pathname$match = pathname.match(/\/user\/(\d+)(?:\/|$)/)) === null || _pathname$match === void 0 ? void 0 : _pathname$match[1];
   };
 
+  const user = {
+    id: ""
+  };
+  function getUserId() {
+    return user.id;
+  }
+  function setUserId(userId) {
+    user.id = userId;
+  }
   function updateUserId() {
-    var _userProfileEl$getAtt;
+    return new Promise(resolve => {
+      const menuEl = document.querySelector("#juejin > div.view-container > div > header > div > nav > ul > ul > li.nav-item.menu");
 
-    const userProfileEl = document.querySelector(".user-dropdown-list > .nav-menu-item-group:nth-child(2) > .nav-menu-item > a[href]");
-    const userId = getUserIdFromPathName((_userProfileEl$getAtt = userProfileEl === null || userProfileEl === void 0 ? void 0 : userProfileEl.getAttribute("href")) !== null && _userProfileEl$getAtt !== void 0 ? _userProfileEl$getAtt : "");
+      if (menuEl) {
+        const observer = new MutationObserver(() => {
+          const userProfileEl = menuEl.querySelector("div.drop-down-menu.light-shadow > div.user-card > div > div.user-detail > a.username");
 
-    if (!userId) {
-      return;
-    }
+          if (userProfileEl) {
+            var _userProfileEl$getAtt;
+
+            const userId = getUserIdFromPathName((_userProfileEl$getAtt = userProfileEl === null || userProfileEl === void 0 ? void 0 : userProfileEl.getAttribute("href")) !== null && _userProfileEl$getAtt !== void 0 ? _userProfileEl$getAtt : "");
+
+            if (!userId) {
+              return;
+            }
+
+            setUserId(userId);
+            document.body.click();
+            observer.disconnect();
+            resolve(userId);
+          }
+        });
+        observer.observe(menuEl, {
+          childList: true
+        });
+        const avatarEl = menuEl.querySelector("div.avatar-wrapper");
+
+        if (avatarEl) {
+          var _avatarEl$textContent;
+
+          if (avatarEl.childElementCount !== 0 || ((_avatarEl$textContent = avatarEl.textContent) === null || _avatarEl$textContent === void 0 ? void 0 : _avatarEl$textContent.trim()) !== "") {
+            setTimeout(() => {
+              avatarEl.click();
+            }, 1000);
+          } else {
+            const observer = new MutationObserver(() => {
+              avatarEl.click();
+              observer.disconnect();
+            });
+            observer.observe(avatarEl, {
+              childList: true
+            });
+          }
+        }
+      }
+    });
   }
 
-  var key = "NovPost";
-  var title = "11 月更文挑战";
-  var docLink = "https://juejin.cn/post/7023643374569816095";
+  var key = "2022DecPost";
+  var title = "12 月更文挑战";
+  var docLink = "https://juejin.cn/post/7167294154827890702";
   var categories = [
   	"前端",
   	"后端",
@@ -182,10 +229,10 @@
   	"iOS",
   	"人工智能"
   ];
-  var startTimeStamp = 1635696000000;
-  var endTimeStamp = 1638287999999;
-  var signSlogan = "2021最后一次更文挑战";
-  var signLink = "https://juejin.cn/post/7023643374569816095";
+  var startTimeStamp = 1668960000000;
+  var endTimeStamp = 1672502399999;
+  var signSlogan = "开启掘金成长之旅！这是我参与「掘金日新计划 · 12 月更文挑战」的第\\d天";
+  var signLink = "https://juejin.cn/post/7167294154827890702";
   var wordCount = 500;
   var rules = [
   	{
@@ -205,7 +252,7 @@
   			},
   			{
   				name: "第四关",
-  				days: 28
+  				days: 32
   			}
   		]
   	},
@@ -216,16 +263,6 @@
   				name: "「劳模」奖励",
   				count: 45,
   				text: "更文天数不限，投稿累计 ≧ 45 篇"
-  			}
-  		]
-  	},
-  	{
-  		title: "终极幸运大奖",
-  		rewards: [
-  			{
-  				name: "终极幸运大奖",
-  				count: 7,
-  				text: "累计更文天数≥7天，即可参与抽奖"
   			}
   		]
   	}
@@ -2081,10 +2118,14 @@
       class: styles.textGray300
     }).append("⚠️ 有", trigger, "文章未参加活动");
     const panel = $("<div>").addClass(styles.warningPanel);
-    trigger.on("click", e => {
-      e.stopPropagation();
-      panel.toggleClass(styles.show);
-    });
+
+    if (invalidSummaries.length > 0) {
+      trigger.on("click", e => {
+        e.stopPropagation();
+        panel.toggleClass(styles.show);
+      });
+    }
+
     document.body.addEventListener("click", () => {
       panel.removeClass(styles.show);
     });
@@ -2250,7 +2291,7 @@
       } = article_info;
       const content = nomatter_1(mark_content).trim();
       articleContentMap.set(article_id, {
-        sloganFit: content.includes(signSlogan),
+        sloganFit: new RegExp(signSlogan).test(content),
         linkFit: new RegExp(`${signLink}((?:\/|$)?)`).test(content),
         count: dist.countWords(mark_content),
         modifiedTimeStamp: mtime * 1000
@@ -2368,26 +2409,33 @@
     };
   }
 
+  async function renderStats(myUserId) {
+    try {
+      const articles = await fetch(myUserId);
+      const stats = statistics(articles);
+      render(stats);
+    } catch (error) {
+      if (error instanceof Error) {
+        renderErrorMessage(error);
+      } else {
+        console.log(error);
+      }
+    }
+  }
+
   const plugin = {
     onLoaded() {
-      updateUserId();
+      updateUserId().then(() => {
+        const myUserId = getUserId();
+        renderStats(myUserId);
+      });
     },
 
     async onRouteChange(prevRouterPathname, currentRouterPathname) {
-      const myUserId = "2894361621692792";
+      const myUserId = getUserId();
 
       if (!inSpecificProfilePage(prevRouterPathname, myUserId) && inSpecificProfilePage(currentRouterPathname, myUserId)) {
-        try {
-          const articles = await fetch(myUserId);
-          const stats = statistics(articles);
-          render(stats);
-        } catch (error) {
-          if (error instanceof Error) {
-            renderErrorMessage(error);
-          } else {
-            console.log(error);
-          }
-        }
+        renderStats(myUserId);
       }
     }
 

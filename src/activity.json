@@ -1,12 +1,12 @@
 {
-  "key": "NovPost",
-  "title": "11 月更文挑战",
-  "docLink": "https://juejin.cn/post/7023643374569816095",
+  "key": "2022DecPost",
+  "title": "12 月更文挑战",
+  "docLink": "https://juejin.cn/post/7167294154827890702",
   "categories": ["前端", "后端", "Android", "iOS", "人工智能"],
-  "startTimeStamp": 1635696000000,
-  "endTimeStamp": 1638287999999,
-  "signSlogan": "2021最后一次更文挑战",
-  "signLink": "https://juejin.cn/post/7023643374569816095",
+  "startTimeStamp": 1668960000000,
+  "endTimeStamp": 1672502399999,
+  "signSlogan": "开启掘金成长之旅！这是我参与「掘金日新计划 · 12 月更文挑战」的第\\d天",
+  "signLink": "https://juejin.cn/post/7167294154827890702",
   "wordCount": 500,
   "rules": [
     {
@@ -26,7 +26,7 @@
         },
         {
           "name": "第四关",
-          "days": 28
+          "days": 32
         }
       ]
     },
@@ -37,16 +37,6 @@
           "name": "「劳模」奖励",
           "count": 45,
           "text": "更文天数不限，投稿累计 ≧ 45 篇"
-        }
-      ]
-    },
-    {
-      "title": "终极幸运大奖",
-      "rewards": [
-        {
-          "name": "终极幸运大奖",
-          "count": 7,
-          "text": "累计更文天数≥7天，即可参与抽奖"
         }
       ]
     }
