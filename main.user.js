@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.0.9
+// @version      0.1.0
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
@@ -98,7 +98,8 @@
               article_id,
               article_info,
               category,
-              user_interact
+              user_interact,
+              tags
             } = article; // 文章字数、内容、发布时间、评论、点赞、收藏、阅读数
 
             const {
@@ -129,7 +130,8 @@
                 collect_count,
                 digg_count: digg_count - (user_interact.is_digg ? 1 : 0),
                 comment_count,
-                title
+                title,
+                tags
               });
             }
           }
@@ -220,7 +222,8 @@
   }
 
   var key = "2022DecPost";
-  var title = "12 月更文挑战";
+  var title = "日新计划｜12月更文挑战";
+  var desc = "限定：活动开始时创作等级为 Lv0-Lv3 的用户";
   var docLink = "https://juejin.cn/post/7167294154827890702";
   var categories = [
   	"前端",
@@ -233,6 +236,9 @@
   var endTimeStamp = 1672502399999;
   var signSlogan = "开启掘金成长之旅！这是我参与「掘金日新计划 · 12 月更文挑战」的第\\d天";
   var signLink = "https://juejin.cn/post/7167294154827890702";
+  var tagNames = [
+  	"掘金·日新计划"
+  ];
   var wordCount = 500;
   var rules = [
   	{
@@ -270,12 +276,14 @@
   var activityData = {
   	key: key,
   	title: title,
+  	desc: desc,
   	docLink: docLink,
   	categories: categories,
   	startTimeStamp: startTimeStamp,
   	endTimeStamp: endTimeStamp,
   	signSlogan: signSlogan,
   	signLink: signLink,
+  	tagNames: tagNames,
   	wordCount: wordCount,
   	rules: rules
   };
@@ -1953,8 +1961,8 @@
     }
   }
 
-  var css_248z$1 = ".style-module_block__1wMKW {\n  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);\n  margin-bottom: 1rem;\n  background-color: #fff;\n  border-radius: 2px;\n  user-select: none;\n}\n\n.style-module_title__2d9pT {\n  padding: 1.333rem;\n  font-size: 1.333rem;\n  font-weight: 600;\n  color: #31445b;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n  cursor: pointer;\n}\n\n.style-module_content__1-VKy {\n  padding: 1.333rem;\n}\n\n.style-module_header__2_Vg4 {\n  margin: 0;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n}\n\n.style-module_header__2_Vg4 > a {\n  color: inherit;\n}\n\n.style-module_header__2_Vg4 > span {\n  margin-left: auto;\n  font-size: 1rem;\n  color: #8a9aa9;\n}\n\n.style-module_section__1cMQp {\n  padding-bottom: 10px;\n  margin-bottom: 20px;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n}\n\n.style-module_profileSidebar__bamb0 {\n  overflow: auto;\n  height: calc(100vh - 8rem);\n  padding-right: 16px;\n}\n";
-  var styles$1 = {"block":"style-module_block__1wMKW","title":"style-module_title__2d9pT","content":"style-module_content__1-VKy","header":"style-module_header__2_Vg4","section":"style-module_section__1cMQp","profileSidebar":"style-module_profileSidebar__bamb0"};
+  var css_248z$1 = ".style-module_block__1wMKW {\n  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);\n  margin-bottom: 1rem;\n  background-color: #fff;\n  border-radius: 2px;\n  user-select: none;\n}\n\n.style-module_title__2d9pT {\n  padding: 1.333rem;\n  font-size: 1.333rem;\n  font-weight: 600;\n  color: #31445b;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n  cursor: pointer;\n}\n\n.style-module_content__1-VKy {\n  padding: 1.333rem;\n}\n\n.style-module_header__2_Vg4 {\n  margin: 0;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 6px;\n}\n\n.style-module_header__2_Vg4 > a {\n  color: inherit;\n}\n\n.style-module_header__2_Vg4 > span {\n  font-size: 1rem;\n  color: #8a9aa9;\n}\n\n.style-module_section__1cMQp {\n  padding-bottom: 10px;\n  margin-bottom: 20px;\n  border-bottom: 1px solid rgba(230, 230, 231, 0.5);\n}\n\n.style-module_desc__3vV3f {\n  color: inherit;\n  opacity: 0.4;\n  font-weight: 500;\n  font-size: 0.8rem;\n  margin-top: -2px;\n}\n\n.style-module_date__3eZA- {\n  font-size: 1rem;\n  color: #8a9aa9;\n}\n\n.style-module_profileSidebar__bamb0 {\n  overflow: auto;\n  height: calc(100vh - 8rem);\n  padding-right: 16px;\n}\n";
+  var styles$1 = {"block":"style-module_block__1wMKW","title":"style-module_title__2d9pT","content":"style-module_content__1-VKy","header":"style-module_header__2_Vg4","section":"style-module_section__1cMQp","desc":"style-module_desc__3vV3f","date":"style-module_date__3eZA-","profileSidebar":"style-module_profileSidebar__bamb0"};
   styleInject(css_248z$1);
 
   const formatDate = (dateInstance, format) => {
@@ -1999,12 +2007,15 @@
         title,
         link,
         startTime,
-        endTime
+        endTime,
+        desc
       } = data;
       const dateText = startTime && endTime ? `${formatDate(new Date(startTime), "MM/DD")} - ${formatDate(new Date(endTime), "MM/DD")}` : "";
+      const descStyle = styles$1.desc;
+      const dateStyle = styles$1.date;
       const headerEl = $("<h3>", {
         class: styles$1.header
-      }).html(`<a href="${link}" target="__blank">${title}</a> <span>${dateText}</span>`);
+      }).html(`<a href="${link}" target="__blank">${title}</a>` + (desc ? `<div class="${descStyle}">${desc}</div>` : " ") + `<div class="${dateStyle}">${dateText}</div>`);
       const sectionEl = $("<div>").addClass(styles$1.section).append(headerEl).append(node);
       data.node = sectionEl[0];
       this.sectionData = this.sectionData.filter(section => section.key !== key).concat([data]).sort((a, b) => {
@@ -2101,7 +2112,8 @@
       link: activityData.docLink,
       startTime: activityData.startTimeStamp,
       endTime: activityData.endTimeStamp,
-      node: containerEl[0]
+      node: containerEl[0],
+      desc: activityData.desc
     });
   });
   const InvalidStatus2Text = {
@@ -2109,7 +2121,8 @@
     category_range: "不在限定分类内",
     word_count: "未达字数",
     slogan_fit: "暗号文本不符",
-    link_fit: "暗号链接不符"
+    link_fit: "暗号链接不符",
+    tag_fit: "未选择指定标签"
   };
 
   const renderWarning = invalidSummaries => {
@@ -2338,7 +2351,8 @@
       startTimeStamp,
       endTimeStamp,
       signSlogan,
-      signLink
+      signLink,
+      tagNames
     } = activityData;
     const articleList = await fetchArticleList(userId, startTimeStamp, endTimeStamp);
     const articleDetails = await Promise.all(articleList.filter(_ref => {
@@ -2379,11 +2393,13 @@
     return articleList.map(article => {
       var _contentInfo$sloganFi, _contentInfo$linkFit, _contentInfo$count;
 
+      const articleTags = new Set(article.tags.filter(tag => tagNames.includes(tag.tag_name)).map(tag => tag.tag_id));
       const contentInfo = articleContentMap.get(article.id);
       return { ...article,
         sloganFit: (_contentInfo$sloganFi = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.sloganFit) !== null && _contentInfo$sloganFi !== void 0 ? _contentInfo$sloganFi : false,
         linkFit: (_contentInfo$linkFit = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.linkFit) !== null && _contentInfo$linkFit !== void 0 ? _contentInfo$linkFit : false,
-        count: (_contentInfo$count = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.count) !== null && _contentInfo$count !== void 0 ? _contentInfo$count : 0
+        count: (_contentInfo$count = contentInfo === null || contentInfo === void 0 ? void 0 : contentInfo.count) !== null && _contentInfo$count !== void 0 ? _contentInfo$count : 0,
+        tagFit: articleTags.size === tagNames.length
       };
     });
   }
@@ -2404,7 +2420,8 @@
         category,
         count,
         sloganFit,
-        linkFit
+        linkFit,
+        tagFit
       } = article;
 
       if (publishTime < startTimeStamp) {
@@ -2448,6 +2465,15 @@
           id,
           title,
           status: "link_fit"
+        });
+        return;
+      }
+
+      if (!tagFit) {
+        invalidSummaries.push({
+          id,
+          title,
+          status: "tag_fit"
         });
         return;
       }

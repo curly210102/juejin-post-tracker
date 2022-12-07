@@ -19,7 +19,7 @@ const articleContentMap = new Map<string, IArticleContentItem>(
 );
 
 async function fetch(userId: string) {
-  const { startTimeStamp, endTimeStamp, signSlogan, signLink } = activityData;
+  const { startTimeStamp, endTimeStamp, signSlogan, signLink, tagNames } = activityData;
   const articleList = await fetchArticleList(
     userId,
     startTimeStamp,
@@ -52,12 +52,14 @@ async function fetch(userId: string) {
   saveToStorage(articleStoragePath, Object.fromEntries(articleContentMap));
 
   return articleList.map((article) => {
+    const articleTags = new Set(article.tags.filter(tag => tagNames.includes(tag.tag_name)).map(tag => tag.tag_id));
     const contentInfo = articleContentMap.get(article.id);
     return {
       ...article,
       sloganFit: contentInfo?.sloganFit ?? false,
       linkFit: contentInfo?.linkFit ?? false,
       count: contentInfo?.count ?? 0,
+      tagFit: articleTags.size === tagNames.length
     };
   });
 }
@@ -69,7 +71,7 @@ function statistics(articles: TypeArticle[]) {
   const invalidSummaries: TypeInvalidSummary[] = [];
 
   articles.forEach((article) => {
-    const { id, title, publishTime, category, count, sloganFit, linkFit } =
+    const { id, title, publishTime, category, count, sloganFit, linkFit, tagFit } =
       article;
     if (publishTime < startTimeStamp) {
       invalidSummaries.push({
@@ -112,6 +114,15 @@ function statistics(articles: TypeArticle[]) {
         id,
         title,
         status: "link_fit",
+      });
+      return;
+    }
+
+    if (!tagFit) {
+      invalidSummaries.push({
+        id,
+        title,
+        status: "tag_fit",
       });
       return;
     }

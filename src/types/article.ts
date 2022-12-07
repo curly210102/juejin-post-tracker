@@ -8,6 +8,10 @@ export interface IArticle {
   digg_count: number;
   comment_count: number;
   title: string;
+  tags: {
+    tag_id: string;
+    tag_name: string;
+  }[]
 }
 
 export interface IArticleContentItem {
@@ -15,10 +19,11 @@ export interface IArticleContentItem {
   modifiedTimeStamp: number;
   sloganFit: boolean;
   linkFit: boolean;
+  tagFit?: boolean;
 }
 
 export type TypeArticle = IArticle &
-  Pick<IArticleContentItem, "count" | "sloganFit" | "linkFit">;
+  Pick<IArticleContentItem, "count" | "sloganFit" | "linkFit" | "tagFit">;
 
 export type TypeInvalidSummary = {
   id: string;
@@ -28,5 +33,6 @@ export type TypeInvalidSummary = {
     | "category_range"
     | "word_count"
     | "slogan_fit"
-    | "link_fit";
+    | "link_fit"
+    | "tag_fit";
 };

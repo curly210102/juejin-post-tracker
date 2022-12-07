@@ -64,7 +64,7 @@ export async function fetchArticleList(
       let lastPublishTime = Infinity;
       if (data) {
         for (const article of data) {
-          const { article_id, article_info, category, user_interact } = article;
+          const { article_id, article_info, category, user_interact, tags } = article;
           // 文章字数、内容、发布时间、评论、点赞、收藏、阅读数
           const {
             ctime,
@@ -75,7 +75,7 @@ export async function fetchArticleList(
             collect_count,
             digg_count,
             comment_count,
-            title,
+            title
           } = article_info;
           const { category_name } = category;
           const publishTime = new Date(ctime * 1000).valueOf();
@@ -101,6 +101,7 @@ export async function fetchArticleList(
               digg_count: digg_count - (user_interact.is_digg ? 1 : 0),
               comment_count,
               title,
+              tags
             });
           }
         }

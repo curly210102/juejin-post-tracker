@@ -24,6 +24,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 6px;
 }
 
 .header > a {
@@ -31,7 +32,6 @@
 }
 
 .header > span {
-  margin-left: auto;
   font-size: 1rem;
   color: #8a9aa9;
 }
@@ -40,6 +40,19 @@
   padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(230, 230, 231, 0.5);
+}
+
+.desc {
+  color: inherit;
+  opacity: 0.4;
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-top: -2px;
+}
+
+.date {
+  font-size: 1rem;
+  color: #8a9aa9;
 }
 
 .profileSidebar {

@@ -21,6 +21,7 @@ export interface IProfileRenderData {
   link?: string;
   startTime?: number;
   endTime?: number;
+  desc?: string;
 }
 class ProfileRenderer {
   private renderId: string = Math.random().toString(16).slice(2);
@@ -54,7 +55,7 @@ class ProfileRenderer {
 
   add(data: IProfileRenderData) {
     const now = new Date().valueOf();
-    const { key, node, title, link, startTime, endTime } = data;
+    const { key, node, title, link, startTime, endTime, desc } = data;
     const dateText =
       startTime && endTime
         ? `${formatDate(new Date(startTime), "MM/DD")} - ${formatDate(
@@ -63,8 +64,10 @@ class ProfileRenderer {
           )}`
         : "";
 
+    const descStyle = styles.desc;
+    const dateStyle = styles.date;
     const headerEl = $("<h3>", { class: styles.header }).html(
-      `<a href="${link}" target="__blank">${title}</a> <span>${dateText}</span>`
+      `<a href="${link}" target="__blank">${title}</a>` +  (desc ? `<div class="${descStyle}">${desc}</div>`: " ") + `<div class="${dateStyle}">${dateText}</div>`
     );
 
     const sectionEl = $("<div>")

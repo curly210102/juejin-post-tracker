@@ -46,6 +46,7 @@ export default ({
     startTime: activityData.startTimeStamp,
     endTime: activityData.endTimeStamp,
     node: containerEl[0],
+    desc: activityData.desc
   });
 };
 
@@ -55,6 +56,7 @@ const InvalidStatus2Text = {
   word_count: "未达字数",
   slogan_fit: "暗号文本不符",
   link_fit: "暗号链接不符",
+  tag_fit: "未选择指定标签"
 };
 
 const renderWarning = (invalidSummaries: TypeInvalidSummary[]) => {
