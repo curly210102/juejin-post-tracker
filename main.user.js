@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         juejin-post-tracker
 // @namespace    juejin-post-tracker
-// @version      0.1.0
+// @version      0.1.1
 // @include      *
 // @run-at       document-end
 // @require      tampermonkey://vendor/jquery.js
@@ -234,7 +234,7 @@
   ];
   var startTimeStamp = 1668960000000;
   var endTimeStamp = 1672502399999;
-  var signSlogan = "开启掘金成长之旅！这是我参与「掘金日新计划 · 12 月更文挑战」的第\\d天";
+  var signSlogan = "开启掘金成长之旅！这是我参与「掘金日新计划 · 12 月更文挑战」的第\\d+天";
   var signLink = "https://juejin.cn/post/7167294154827890702";
   var tagNames = [
   	"掘金·日新计划"

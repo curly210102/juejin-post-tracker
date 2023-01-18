@@ -1,6 +1,6 @@
 {
   "name": "juejin-post-tracker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "dev": "rollup --config --environment BUILD:development --watch",
     "build": "tsc && rollup --config",
